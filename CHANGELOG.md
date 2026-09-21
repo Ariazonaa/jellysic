@@ -7,6 +7,10 @@ caveat that a minor bump may still change behaviour.
 
 ## [Unreleased]
 
+## [0.5.0] — 2026-09-22
+
+### Removed
+
 ### Fixed
 
 - **Saving in the metadata editor did nothing.** It asks before it writes, and
@@ -15,14 +19,13 @@ caveat that a minor bump may still change behaviour.
   same stacking level the editor — which does move — was painted over it, so
   the prompt sat behind the editor's dark backdrop: invisible, and the click
   meant for it landed on that backdrop. Pressing Save looked like it did
-  nothing at all, because nothing is exactly what happened. Every confirmation
-  asked from inside an open dialog was affected, not just this one.
+  nothing at all, because nothing is exactly what happened. Any confirmation
+  asked from inside another dialog would have gone the same way; the metadata
+  editor was the only place that did.
 - A successful metadata write could still be reported as an error: the list
   behind the dialog was reloaded inside the same guarded block as the write,
   so a list that failed to reload turned a finished save into an error message
   and kept the dialog open.
-
-### Removed
 
 ## [0.4.0] — 2026-09-21
 
@@ -213,7 +216,8 @@ First public release. Windows, Jellyfin 10.11 or newer.
 - No offline downloads, casting, podcasts, multiple servers at once, or
   Subsonic/Navidrome backends. These are deliberate non-goals for 1.0.
 
-[Unreleased]: https://github.com/Ariazonaa/jellysic/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/Ariazonaa/jellysic/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/Ariazonaa/jellysic/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/Ariazonaa/jellysic/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/Ariazonaa/jellysic/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/Ariazonaa/jellysic/compare/v0.1.0...v0.2.0
