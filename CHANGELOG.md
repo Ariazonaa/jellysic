@@ -7,6 +7,8 @@ caveat that a minor bump may still change behaviour.
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-09-21
+
 ### Added
 
 - **In-app updates.** The installed app can ask the release page whether a
@@ -19,8 +21,8 @@ caveat that a minor bump may still change behaviour.
   playback report is flushed before it does. The portable build says it cannot
   update itself instead of turning itself into an installed copy.
 - Releases now carry `latest.json` and the installer's `.sig`, which is what
-  the update check reads. 0.1.0 has neither, so the step to the release after
-  it is still a manual download.
+  the update check reads. 0.1.0 has neither, so the step from 0.1.0 to 0.2.0
+  is a manual download; every step after it is not.
 
 ### Fixed
 
@@ -114,5 +116,6 @@ First public release. Windows, Jellyfin 10.11 or newer.
 - No offline downloads, casting, podcasts, multiple servers at once, or
   Subsonic/Navidrome backends. These are deliberate non-goals for 1.0.
 
-[Unreleased]: https://github.com/Ariazonaa/jellysic/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/Ariazonaa/jellysic/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/Ariazonaa/jellysic/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/Ariazonaa/jellysic/releases/tag/v0.1.0

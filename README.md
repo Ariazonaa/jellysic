@@ -52,7 +52,7 @@ is on the list. Every release carries a `SHA256SUMS.txt`, and the builds are
 produced by [the release workflow](.github/workflows/release.yml) from the
 tagged commit rather than on someone's machine.
 
-From the next release on, the installed app keeps itself current: it asks once per start
+From 0.2.0 on, the installed app keeps itself current: it asks once per start
 whether a newer version exists (you can switch that off) and installs it from
 Settings when you say so — never while a track is playing, and only after the
 download's signature checks out against the project's key. The portable zip
