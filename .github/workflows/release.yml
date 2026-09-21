@@ -107,7 +107,15 @@ jobs:
           $files = @(Get-ChildItem $out -File)
           $sums = $files | Get-FileHash -Algorithm SHA256 |
             ForEach-Object { "{0}  {1}" -f $_.Hash.ToLower(), (Split-Path $_.Path -Leaf) }
-          Set-Content -Path "$out/SHA256SUMS.txt" -Value $sums -Encoding ascii
+
+          # LF, no BOM. This file exists to be fed to `sha256sum -c`, and there a
+          # CRLF ending becomes part of the file name -- every line fails to open.
+          # Set-Content would write CRLF on Windows, so go through .NET directly.
+          $lf = [string][char]10
+          [System.IO.File]::WriteAllText(
+            (Join-Path (Get-Location) "$out/SHA256SUMS.txt"),
+            (($sums -join $lf) + $lf),
+            (New-Object System.Text.UTF8Encoding $false))
           Get-Content "$out/SHA256SUMS.txt"
           Get-ChildItem $out | Select-Object Name, Length
 
