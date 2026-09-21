@@ -7,6 +7,8 @@ caveat that a minor bump may still change behaviour.
 
 ## [Unreleased]
 
+### Removed
+
 ## [0.4.0] — 2026-09-21
 
 ### Added
