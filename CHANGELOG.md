@@ -7,6 +7,14 @@ caveat that a minor bump may still change behaviour.
 
 ## [Unreleased]
 
+### Changed
+
+- The Opus decoder now builds on libopus 1.6.1 instead of 1.3. The `opus`
+  crate moved to a maintained `-sys` crate in August; the one it used before
+  had been sitting untouched since 2021 and carries an "unmaintained" advisory
+  (RUSTSEC-2026-0150). Nothing in the app had to change, and the binary grew
+  by 80 KB.
+
 ### Added
 
 - **The stats page is a dashboard now.** Four numbers about the library —
