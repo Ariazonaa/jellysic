@@ -7,13 +7,7 @@ caveat that a minor bump may still change behaviour.
 
 ## [Unreleased]
 
-### Changed
-
-- The Opus decoder now builds on libopus 1.6.1 instead of 1.3. The `opus`
-  crate moved to a maintained `-sys` crate in August; the one it used before
-  had been sitting untouched since 2021 and carries an "unmaintained" advisory
-  (RUSTSEC-2026-0150). Nothing in the app had to change, and the binary grew
-  by 80 KB.
+## [0.4.0] — 2026-09-21
 
 ### Added
 
@@ -34,6 +28,11 @@ caveat that a minor bump may still change behaviour.
 
 ### Changed
 
+- The Opus decoder now builds on libopus 1.6.1 instead of 1.3. The `opus`
+  crate moved to a maintained `-sys` crate in August; the one it used before
+  had been sitting untouched since 2021 and carries an "unmaintained" advisory
+  (RUSTSEC-2026-0150). Nothing in the app had to change, and the binary grew
+  by 80 KB.
 - An update check now says in the log what it found — the version offered and
   the one it was compared against. The panel only ever shows the answer, and a
   diagnostic export should be able to answer the next question by itself.
@@ -197,7 +196,8 @@ First public release. Windows, Jellyfin 10.11 or newer.
 - No offline downloads, casting, podcasts, multiple servers at once, or
   Subsonic/Navidrome backends. These are deliberate non-goals for 1.0.
 
-[Unreleased]: https://github.com/Ariazonaa/jellysic/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/Ariazonaa/jellysic/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/Ariazonaa/jellysic/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/Ariazonaa/jellysic/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/Ariazonaa/jellysic/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/Ariazonaa/jellysic/releases/tag/v0.1.0
