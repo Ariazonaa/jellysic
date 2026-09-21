@@ -672,7 +672,9 @@ pub struct AlbumDto {
     pub artists: Vec<ArtistRef>,
 }
 
-#[derive(Debug, Clone, Serialize)]
+// `Default` is for tests that care about three of these fields and nothing
+// else; every field of a track DTO has a sensible empty value anyway.
+#[derive(Debug, Clone, Default, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TrackDto {
     pub id: String,

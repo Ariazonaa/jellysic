@@ -387,6 +387,30 @@ export interface StatsData {
   recentlyPlayed: TrackDto[];
   mostPlayedTracks: TrackDto[];
   mostPlayedAlbums: AlbumDto[];
+  totals: LibraryTotals;
+  /** Added up from the most played tracks — Jellyfin cannot sort artists by
+   *  plays, so the page says where the number comes from. */
+  topArtists: ArtistPlays[];
+  decades: DecadeAlbums[];
+}
+
+export interface LibraryTotals {
+  tracks: number;
+  albums: number;
+  artists: number;
+  playedTracks: number;
+}
+
+export interface ArtistPlays {
+  id: string | null;
+  name: string;
+  plays: number;
+}
+
+export interface DecadeAlbums {
+  startYear: number;
+  label: string;
+  albums: number;
 }
 
 /** First page of each favorites section, with its total (`get_favorites`). */

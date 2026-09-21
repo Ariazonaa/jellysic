@@ -9,6 +9,13 @@ caveat that a minor bump may still change behaviour.
 
 ### Added
 
+- **The stats page is a dashboard now.** Four numbers about the library —
+  tracks, albums, artists, and how much of it has been played at least once —
+  and two charts: the most played artists, and albums by decade. Both bars are
+  walkable: a row leads to that artist or that decade. The artist numbers are
+  added up from your most played tracks, because the server counts plays per
+  track and not per artist, and the chart says so rather than pretending
+  otherwise.
 - **Metadata for many tracks at once.** Select rows in the song list,
   right-click, and set album artist, genres or the year for all of them —
   genres can be added to what each track already has instead of replacing it.
