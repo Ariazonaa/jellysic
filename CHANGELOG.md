@@ -7,6 +7,30 @@ caveat that a minor bump may still change behaviour.
 
 ## [Unreleased]
 
+### Added
+
+- **Every track list has the same right-click menu.** Album, playlist,
+  favorites and search results had a few hover buttons and no menu at all;
+  they now offer what the song list has offered all along — play, play next,
+  add to the queue, add to a playlist, instant mix, go to album or artist,
+  info, edit, download, delete — plus what only that list can do, such as
+  removing an entry from the playlist it sits in or taking a track out of the
+  favorites.
+- **The playlists are in the sidebar**, and tracks and albums can be dragged
+  onto them. Drag a row from the song list, an album's track list or the
+  favorites — or a whole album from a grid — and drop it on a playlist to add
+  it. A drag from outside the window is not accepted; only the app's own
+  payload lights a playlist up.
+- **The home page can be arranged.** Each row can be moved or hidden from its
+  own heading; Settings → View lists them all, which is where a hidden one
+  comes back from. A row the server has nothing for still stays out — that is
+  not a setting, that is an empty row.
+- **Jump to the playing track.** `J`, the command palette, or the pill that
+  appears in the queue while the current entry is scrolled out of sight. The
+  queue also opens on the playing track now, and follows along to the next one
+  while it is on screen — but never while you are reading somewhere else in
+  the list.
+
 ### Changed
 
 - The update panel now shows what actually changed. `latest.json` carries the

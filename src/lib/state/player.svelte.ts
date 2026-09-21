@@ -43,9 +43,21 @@ class PlayerStore {
     duplicateCount: 0,
   });
   showQueue = $state(false);
+  /** Bumped by "jump to the playing track"; the queue panel scrolls to the
+   *  current entry when this changes. A counter, not a flag: asking twice in a
+   *  row has to be two events, and there is nothing to reset. */
+  revealCurrent = $state(0);
   showLyrics = $state(false);
   /** Last playback error, shown as a dismissible banner. */
   error = $state<string | null>(null);
+  /** Show the queue and put the playing track in front of the user — from
+   *  the palette, the shortcut, or anywhere else that knows where they left
+   *  off is not where the music is. */
+  jumpToCurrent() {
+    this.showQueue = true;
+    this.revealCurrent++;
+  }
+
   /** Optimistic favorite overrides keyed by itemId — the queue's `isFavorite`
    *  is only a snapshot, and the 400ms state ticks would otherwise revert a
    *  toggle before the server round-trip returns. */
