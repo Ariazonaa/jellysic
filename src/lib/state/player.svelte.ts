@@ -19,6 +19,8 @@ const initial: PlayerState = {
   status: "idle",
   current: null,
   sleepRemainingMs: null,
+  stopAfter: "off",
+  stopAfterItem: null,
   index: 0,
   queueLen: 0,
   positionMs: 0,

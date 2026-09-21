@@ -9,6 +9,19 @@ caveat that a minor bump may still change behaviour.
 
 ### Added
 
+- **Volume normalization has an album mode.** Settings → Playback now offers
+  off, per track or per album. Per album plays every track of an album at one
+  gain, so a quiet piece stays quieter than a loud one — what the album was
+  mixed for. Jellyfin only sends an album value after 10.11; without one the
+  gain is the median of the album's tracks in the queue, which is the same
+  constant offset even if the absolute level can sit a little off. A change
+  takes effect from the next track.
+- **Stop after this track, or after this album.** Right-click a queue entry:
+  playback ends where you said it would, without a fade — the track finishes
+  the way it was recorded and then it is quiet. The armed row is marked, and
+  the gapless hand-off is held back for that one boundary so the track really
+  does end. An album stop knows where its album ends, even when the queue
+  continues with another one.
 - **Every track list has the same right-click menu.** Album, playlist,
   favorites and search results had a few hover buttons and no menu at all;
   they now offer what the song list has offered all along — play, play next,

@@ -83,6 +83,10 @@
     revealCurrent("smooth");
   });
 
+  // A square in a circle: the sign for "and then it is quiet".
+  const ICON_STOP =
+    "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zM9 9h6v6H9V9z";
+
   let menu = $state<{ x: number; y: number; items: ContextMenuItem[]; label?: string } | null>(null);
   let addTo = $state<{ x: number; y: number; trackIds: string[] } | null>(null);
   let info = $state<{ itemId: string; name: string } | null>(null);
@@ -170,6 +174,41 @@
       x: event.clientX,
       y: event.clientY,
       items: [
+        {
+          // Armed on this row already? Then the entry takes it back off —
+          // otherwise there would be no way to undo it from here.
+          label:
+            player.state.stopAfter === "track" && player.state.stopAfterItem === track.itemId
+              ? m.queue_stop_after_track_off()
+              : m.queue_stop_after_track(),
+          icon: ICON_STOP,
+          action: () =>
+            player.run(
+              api.playerSetStopAfter(
+                player.state.stopAfter === "track" && player.state.stopAfterItem === track.itemId
+                  ? "off"
+                  : "track",
+                track.itemId,
+              ),
+            ),
+        },
+        {
+          label:
+            player.state.stopAfter === "album" && player.state.stopAfterItem === track.itemId
+              ? m.queue_stop_after_album_off()
+              : m.queue_stop_after_album(),
+          icon: ICON_STOP,
+          disabled: !track.albumId,
+          action: () =>
+            player.run(
+              api.playerSetStopAfter(
+                player.state.stopAfter === "album" && player.state.stopAfterItem === track.itemId
+                  ? "off"
+                  : "album",
+                track.itemId,
+              ),
+            ),
+        },
         {
           label: m.queue_play_now(),
           icon: "M8 5v14l11-7L8 5z",
@@ -410,6 +449,21 @@
               {/if}
             </div>
           </button>
+          {#if player.state.stopAfter !== "off" && player.state.stopAfterItem === track.itemId}
+            <!-- The armed stop belongs on the row it was armed on: nothing
+                 else in the list says where the music will end. -->
+            <span
+              class="shrink-0 text-accent"
+              title={player.state.stopAfter === "album"
+                ? m.queue_stop_after_album()
+                : m.queue_stop_after_track()}
+              aria-label={m.queue_stop_after_armed()}
+            >
+              <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor" aria-hidden="true">
+                <path d={ICON_STOP} />
+              </svg>
+            </span>
+          {/if}
           <span class="text-[11px] text-ink-muted tabular-nums">
             {formatDuration(track.durationMs)}
           </span>
