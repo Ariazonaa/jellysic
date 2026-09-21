@@ -143,7 +143,11 @@ export interface QueueTrack {
   imageTag: string | null;
   imageBlurHash: string | null;
   streamUrl: string;
-  playSessionId: string;
+  /** Identity of this queue line (not the server's play session, which the
+   *  player mints per playback attempt). Stable across moves, which is what
+   *  row keys and "which entry did I click" resolve against. Empty for
+   *  entries persisted by builds before it existed. */
+  entryId: string;
   normalizationGain: number | null;
   artists: ArtistRef[];
   genres: GenreRef[];

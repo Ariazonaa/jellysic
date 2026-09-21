@@ -22,6 +22,16 @@ caveat that a minor bump may still change behaviour.
   the update check reads. 0.1.0 has neither, so the step to the release after
   it is still a manual download.
 
+### Fixed
+
+- The Jellyfin play session is now minted per attempt at a track instead of
+  once per queue entry. Playing the same entry again — repeat-one, jumping
+  back, a queue restored after a restart — reported a start under a session
+  the server had already been told was stopped, which left it unable to tie
+  the reports to the right playback and to the transcode job it had started
+  for it. A reopen (seeking inside a transcode, switching the output device)
+  still continues the running session, because it is the same playback.
+
 ## [0.1.0] — 2026-09-21
 
 First public release. Windows, Jellyfin 10.11 or newer.
