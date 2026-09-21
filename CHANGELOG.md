@@ -7,6 +7,16 @@ caveat that a minor bump may still change behaviour.
 
 ## [Unreleased]
 
+### Added
+
+- **Metadata for many tracks at once.** Select rows in the song list,
+  right-click, and set album artist, genres or the year for all of them —
+  genres can be added to what each track already has instead of replacing it.
+  Only what you fill in is written: everything left empty stays as it is on
+  each track, and titles and track numbers are not offered at all, because
+  they are not something several tracks share. A track the server refuses is
+  counted and the rest still go through.
+
 ### Changed
 
 - An update check now says in the log what it found — the version offered and
