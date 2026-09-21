@@ -7,6 +7,21 @@ caveat that a minor bump may still change behaviour.
 
 ## [Unreleased]
 
+### Fixed
+
+- **Saving in the metadata editor did nothing.** It asks before it writes, and
+  that prompt was the one dialog in the app that stayed where it was declared
+  instead of moving to the end of the document like every other overlay. At the
+  same stacking level the editor — which does move — was painted over it, so
+  the prompt sat behind the editor's dark backdrop: invisible, and the click
+  meant for it landed on that backdrop. Pressing Save looked like it did
+  nothing at all, because nothing is exactly what happened. Every confirmation
+  asked from inside an open dialog was affected, not just this one.
+- A successful metadata write could still be reported as an error: the list
+  behind the dialog was reloaded inside the same guarded block as the write,
+  so a list that failed to reload turned a finished save into an error message
+  and kept the dialog open.
+
 ### Removed
 
 ## [0.4.0] — 2026-09-21
