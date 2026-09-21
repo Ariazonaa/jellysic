@@ -100,9 +100,14 @@ jobs:
           if (-not (Test-Path $exe)) { "::error::jellysic.exe not found at $exe"; exit 1 }
           Compress-Archive -Path $exe -DestinationPath "$out/jellysic_${env:VERSION}_x64-portable.zip"
 
-          Get-ChildItem $out -File | Get-FileHash -Algorithm SHA256 |
-            ForEach-Object { "{0}  {1}" -f $_.Hash.ToLower(), (Split-Path $_.Path -Leaf) } |
-            Out-File -FilePath "$out/SHA256SUMS.txt" -Encoding ascii
+          # The list is materialized with @() before anything is written: a
+          # PowerShell pipeline streams, so writing the sums file straight out of
+          # a Get-ChildItem over the same directory makes it try to hash the file
+          # it is at that moment creating.
+          $files = @(Get-ChildItem $out -File)
+          $sums = $files | Get-FileHash -Algorithm SHA256 |
+            ForEach-Object { "{0}  {1}" -f $_.Hash.ToLower(), (Split-Path $_.Path -Leaf) }
+          Set-Content -Path "$out/SHA256SUMS.txt" -Value $sums -Encoding ascii
           Get-Content "$out/SHA256SUMS.txt"
           Get-ChildItem $out | Select-Object Name, Length
 
