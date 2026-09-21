@@ -7,6 +7,17 @@ caveat that a minor bump may still change behaviour.
 
 ## [Unreleased]
 
+### Changed
+
+- The update panel now shows what actually changed. `latest.json` carries the
+  release's changelog section instead of a sentence pointing at a file the
+  dialog cannot open.
+- A failed update check says what went wrong in words: the releases page was
+  unreachable, it holds no release for this platform, the download broke off,
+  or — the one worth its own sentence — the download did not match the
+  project's signature and was discarded. The technical detail stays in the log
+  and in the diagnostic export.
+
 ## [0.2.0] — 2026-09-21
 
 ### Added

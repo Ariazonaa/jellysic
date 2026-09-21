@@ -157,9 +157,21 @@ jobs:
             # and the tag a release of this version would carry is known.
             $tag = if ($env:GITHUB_REF -like "refs/tags/*") { $env:GITHUB_REF_NAME } else { "v$($env:VERSION)" }
             $name = Split-Path $setup -Leaf
+
+            # What the app itself shows when it finds this update, so it has to
+            # say what changed rather than point at a file the dialog cannot
+            # open. The sentence stays as the fallback for a version the
+            # changelog does not name -- a missing section is worth a warning,
+            # not a failed release.
+            $notes = (node scripts/changelog-section.mjs $env:VERSION) -join ([string][char]10)
+            if (-not $notes) {
+              "::warning::CHANGELOG.md has no section for $($env:VERSION); the update notes only point at it"
+              $notes = "See the release notes and CHANGELOG.md for what changed in $($env:VERSION)."
+            }
+
             $manifest = [ordered]@{
               version   = $env:VERSION
-              notes     = "See the release notes and CHANGELOG.md for what changed in $($env:VERSION)."
+              notes     = $notes
               pub_date  = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
               platforms = [ordered]@{
                 "windows-x86_64" = [ordered]@{
