@@ -9,7 +9,15 @@ caveat that a minor bump may still change behaviour.
 
 ## [0.5.0] — 2026-09-22
 
-### Removed
+### Changed
+
+- **The installer is built by a pipeline that runs no third-party code.** The
+  one action that was not GitHub's own is gone — it put the Microsoft compiler
+  on the PATH, which turned out to be something nothing needed: cargo finds the
+  linker and cmake finds Visual Studio through the registry. Proven before it
+  was removed, uncached, on every runner this project builds on. What signs and
+  publishes your installer is now GitHub's checkout and GitHub's node setup,
+  and nothing else.
 
 ### Fixed
 
@@ -56,6 +64,12 @@ caveat that a minor bump may still change behaviour.
 - An update check now says in the log what it found — the version offered and
   the one it was compared against. The panel only ever shows the answer, and a
   diagnostic export should be able to answer the next question by itself.
+- Groundwork for installing Jellysic with `winget`: the three manifests that
+  the Windows package repository wants are generated from a published release —
+  download URL, release date and the checksum, the last of these re-computed
+  against the installer as it is actually served — instead of being typed out
+  by hand. Nothing is listed there yet; this is the part that had to exist
+  first.
 
 ## [0.3.0] — 2026-09-21
 
