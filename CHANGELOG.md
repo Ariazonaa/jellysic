@@ -7,6 +7,12 @@ caveat that a minor bump may still change behaviour.
 
 ## [Unreleased]
 
+### Changed
+
+- An update check now says in the log what it found — the version offered and
+  the one it was compared against. The panel only ever shows the answer, and a
+  diagnostic export should be able to answer the next question by itself.
+
 ## [0.3.0] — 2026-09-21
 
 ### Added
