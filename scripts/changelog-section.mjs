@@ -1,6 +1,6 @@
 // Print one version's section of CHANGELOG.md as plain text.
 //
-//   node scripts/changelog-section.mjs 0.2.0 [--max 2000]
+//   node scripts/changelog-section.mjs 0.2.0 [--max 4000]
 //
 // The release workflow puts this into `latest.json` as the update's `notes`,
 // and that is what the app shows in Settings -> Updates when it finds an
@@ -43,7 +43,7 @@ function plain(text) {
  * paragraph. A line that starts a bullet (`- `) or a heading begins a new
  * block; anything else continues the one before it.
  */
-export function sectionText(changelog, version, max = 2000) {
+export function sectionText(changelog, version, max = 4000) {
   const blocks = [];
   for (const raw of sectionLines(changelog, version)) {
     const line = raw.trimEnd();
@@ -77,7 +77,17 @@ export function sectionText(changelog, version, max = 2000) {
   while (out.length > 0 && out[out.length - 1] === "") out.pop();
 
   const text = out.join("\n");
-  return text.length > max ? `${text.slice(0, max - 1).trimEnd()}…` : text;
+  if (text.length <= max) return text;
+  // Cut between blocks, never inside a sentence: a bullet that stops halfway
+  // reads like something went wrong, not like a text that was too long.
+  const kept = [];
+  let used = 0;
+  for (const block of out) {
+    if (used + block.length + 1 > max - 2) break;
+    kept.push(block);
+    used += block.length + 1;
+  }
+  return `${kept.join("\n").trimEnd()}\n…`;
 }
 
 // Run as a script (not when imported by a test).
@@ -88,7 +98,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     process.exit(2);
   }
   const maxIdx = process.argv.indexOf("--max");
-  const max = maxIdx >= 0 ? Number(process.argv[maxIdx + 1]) : 2000;
+  const max = maxIdx >= 0 ? Number(process.argv[maxIdx + 1]) : 4000;
   const changelog = readFileSync(join(root, "CHANGELOG.md"), "utf8");
   const text = sectionText(changelog, version, max);
   if (text) process.stdout.write(`${text}\n`);
