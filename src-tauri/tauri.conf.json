@@ -26,6 +26,17 @@
       "devCsp": "default-src 'self' ipc: http://ipc.localhost; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: jfimg: http://jfimg.localhost; connect-src 'self' ipc: http://ipc.localhost jfimg: http://jfimg.localhost ws://localhost:1420 http://localhost:1420; font-src 'self' data:; media-src 'self' blob:; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'"
     }
   },
+  "plugins": {
+    "updater": {
+      "endpoints": [
+        "https://github.com/Ariazonaa/jellysic/releases/latest/download/latest.json"
+      ],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDFEMDg2MEYxQzE3M0E4RTYKUldUbXFIUEI4V0FJSFZEWDN5L21DK09RTEJwSXRaWGUxRmxSSkY3bit3RmtRMHYwdzdKWTVBNk0K",
+      "windows": {
+        "installMode": "passive"
+      }
+    }
+  },
   "bundle": {
     "active": true,
     "targets": ["nsis"],

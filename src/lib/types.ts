@@ -238,6 +238,19 @@ export interface DesktopSettings {
   closeBehavior: CloseBehavior;
   startMinimized: boolean;
   coverCacheLimitMb: number;
+  autoCheckUpdates: boolean;
+}
+
+/** What `check_for_update` answers (src-tauri/src/updater.rs). `version` is
+ *  null when the release endpoint has nothing newer; `installable` is false
+ *  for a portable copy, which can see an update but must not run the
+ *  installer. */
+export interface UpdateInfo {
+  currentVersion: string;
+  version: string | null;
+  notes: string | null;
+  date: string | null;
+  installable: boolean;
 }
 
 export interface CacheInfo {

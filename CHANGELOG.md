@@ -7,6 +7,21 @@ caveat that a minor bump may still change behaviour.
 
 ## [Unreleased]
 
+### Added
+
+- **In-app updates.** The installed app can ask the release page whether a
+  newer version exists — once per start, and that check can be switched off in
+  Settings → Updates, where there is also a button to check on demand. An
+  update is downloaded and verified against the project's minisign key before
+  the installer is opened, so a swapped download cannot be installed even
+  though the installer itself is not code-signed. It never runs while a track
+  is playing or loading, because the installer closes the app, and the last
+  playback report is flushed before it does. The portable build says it cannot
+  update itself instead of turning itself into an installed copy.
+- Releases now carry `latest.json` and the installer's `.sig`, which is what
+  the update check reads. 0.1.0 has neither, so the step to the release after
+  it is still a manual download.
+
 ## [0.1.0] — 2026-09-21
 
 First public release. Windows, Jellyfin 10.11 or newer.
