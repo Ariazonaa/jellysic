@@ -105,14 +105,12 @@
         }}
       />
     {:else}
-      <div class="flex shrink-0 items-center gap-2">
-        <button
-          class="rounded-full bg-accent px-4 py-1.5 text-sm font-bold text-(--color-on-accent) transition-colors hover:bg-accent-hover"
-          onclick={() => (creating = true)}
-        >
-          {m.playlist_new()}
-        </button>
-      </div>
+      <button
+        class="shrink-0 rounded-full bg-accent px-4 py-1.5 text-sm font-bold text-(--color-on-accent) transition-colors hover:bg-accent-hover"
+        onclick={() => (creating = true)}
+      >
+        {m.playlist_new()}
+      </button>
     {/if}
   </div>
 
